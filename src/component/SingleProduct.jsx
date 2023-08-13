@@ -3,7 +3,6 @@ import { Button, Card, Modal } from "react-bootstrap";
 import Rating from "./Rating";
 import { BsCurrencyRupee } from "react-icons/bs";
 import { CartState } from "../context/Context";
-import ProductDetails from "./ProductDetails";
 import { Link, useNavigate } from 'react-router-dom';
 
 const SingleProduct = ({ prod }) => {
@@ -50,31 +49,32 @@ const transformProducts = () => {
             <Rating className="star" rating={prod.rating} />
           </Card.Subtitle>
           <div style={{ display: "flex", gap: "5rem" }}>
-            {cart.some((p) => p.id === prod.id) ? (
-              <Button
-                onClick={() => {
-                  dispatch({
-                    type: "REMOVE_FROM_CART",
-                    payload: prod,
-                  });
-                }}
-                variant="danger"
-              >
-                Remove from cart
-              </Button>
-            ) : (
-              <Button
-                onClick={() => {
-                  dispatch({
-                    type: "ADD_TO_CART",
-                    payload: prod,
-                  });
-                }}
-                disabled={!prod.stock}
-              >
-                {!prod.stock ? "Out of Stock" : "Add to cart"}
-              </Button>
-            )}
+          {cart.some((p) => p.id === prod.id) ? (
+  <Button
+    onClick={() => {
+      dispatch({
+        type: "REMOVE_FROM_CART",
+        payload: prod,
+      });
+    }}
+    variant="danger"
+  >
+    Remove from cart
+  </Button>
+) : (
+  <Button
+    onClick={() => {
+      dispatch({
+        type: "ADD_TO_CART",
+        payload: prod,
+      });
+    }}
+    disabled={!prod.stock}
+  >
+    {!prod.stock ? "Out of Stock" : "Add to cart"}
+  </Button>
+)}
+
             <Button onClick={handleDetailsModalShow}>Details</Button>
 
 
